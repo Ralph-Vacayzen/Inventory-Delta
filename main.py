@@ -14,8 +14,8 @@ st.info('Get the changes in inventory, after looking at warehouse counts and wha
 with st.expander('Uploaded Files'):
     
     file_descriptions = [
-        ['Availability.xlsx','integraSoft Datebase > Vacayzen_Production > Availability'],
-        ['Inventory.xlsx','integraSoft Datebase > Vacayzen_Production > Inventory'],
+        ['Availability.xlsx','Vacayzen_Production > Availability'],
+        ['Inventory.xlsx','Vacayzen_Production > Vacayzen_Production > Inventory'],
         ['Vacayzen Inventory Count - Warehouse.csv','Google Sheet > Vacayzen Inventory Count > Warehouse'],
         ['Vacayzen Inventory Count - Seagrove.csv','Google Sheet > Vacayzen Inventory Count > Seagrove'],
         ['Vacayzen Inventory Count - Pointe.csv','Google Sheet > Vacayzen Inventory Count > Pointe'],
