@@ -18,7 +18,6 @@ with st.expander('Uploaded Files'):
         ['Inventory.xlsx','Vacayzen_Production > Inventory'],
         ['Vacayzen Inventory Count - Warehouse.csv','Google Sheet > Vacayzen Inventory Count > Warehouse'],
         ['Vacayzen Inventory Count - Seagrove.csv','Google Sheet > Vacayzen Inventory Count > Seagrove'],
-        ['Vacayzen Inventory Count - Pointe.csv','Google Sheet > Vacayzen Inventory Count > Pointe'],
         ['Vacayzen Inventory Count - House Bikes.csv','Google Sheet > Vacayzen Inventory Count > House Bikes']
     ]
 
@@ -27,7 +26,6 @@ with st.expander('Uploaded Files'):
         'Inventory.xlsx': None,
         'Vacayzen Inventory Count - Warehouse.csv': None,
         'Vacayzen Inventory Count - Seagrove.csv': None,
-        'Vacayzen Inventory Count - Pointe.csv': None,
         'Vacayzen Inventory Count - House Bikes.csv': None
     }
 
@@ -90,20 +88,17 @@ elif len(uploaded_files) > 0 and hasAllRequiredFiles:
     print('reading in counts...')
     wh          = pd.read_csv(uploaded_files[files['Vacayzen Inventory Count - Warehouse.csv']])
     ss          = pd.read_csv(uploaded_files[files['Vacayzen Inventory Count - Seagrove.csv']])
-    tp          = pd.read_csv(uploaded_files[files['Vacayzen Inventory Count - Pointe.csv']])
     hb          = pd.read_csv(uploaded_files[files['Vacayzen Inventory Count - House Bikes.csv']])
 
     print('merging counts...')
     wh.columns  = ['category','asset','warehouse']
     ss.columns  = ['category','asset','seagrove']
-    tp.columns  = ['category','asset','pointe']
     hb.columns  = ['category','asset','house']
 
     df = pd.merge(wh, ss, how='outer')
-    df = pd.merge(df, tp, how='outer')
     df = pd.merge(df, hb, how='outer')
     df = df.fillna(0)
-    df['counted'] = df.warehouse + df.seagrove + df.pointe + df.house
+    df['counted'] = df.warehouse + df.seagrove + df.house
     df = df[['category','asset','counted']]
 
     print('merging rented and counted...')
